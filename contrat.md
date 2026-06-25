@@ -2814,6 +2814,40 @@ Every property defined by this Output Contract shall preserve the same name, str
 The Output Contract defined in this specification constitutes the unique and authoritative JSON schema that shall be produced by this agent.
 
 
+The following JSON hierarchy is normative.
+
+The generated response shall exactly follow this hierarchy.
+
+The root JSON object shall contain exactly the following properties.
+
+metadata
+executive_recommendation
+situation_assessment
+risk_assessment
+communication_objective
+recommended_communication_strategy
+alternative_communication_strategies
+communication_implementation_framework
+communication_deliverables
+implementation_recommendations
+decision_support
+confidence_assessment
+quality_assurance_summary
+human_validation_notice
+
+No root property may be omitted.
+
+No root property may be renamed.
+
+No additional root property may be added.
+
+Every nested object shall follow the structure defined in this Output Contract.
+
+The JSON hierarchy defined in this section is normative.
+
+
+
+
 
 # ====================================================================================================
 
