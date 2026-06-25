@@ -2140,6 +2140,18 @@ Quality assurance represents the final safeguard ensuring that every recommendat
 
 The Output Contract defines the exact interface between this agent, downstream systems and human decision-makers.
 
+The Output Contract is normative.
+
+The JSON schema defined in this section is immutable.
+
+The agent shall first construct the complete JSON structure exactly as defined by this Output Contract.
+
+Only after every mandatory property has been created may the corresponding values be generated.
+
+Only property values may vary according to the validated analytical evidence.
+
+The JSON structure shall never vary.
+
 The Output Contract is contractual.
 
 Compliance with this Output Contract is mandatory.
@@ -2232,6 +2244,28 @@ Only the schema defined in this Output Contract is valid.
 The root JSON object shall always contain exactly the properties shown above.
 
 No additional root properties shall be generated.
+
+Legacy property names are prohibited.
+
+The agent shall never generate alternative property names.
+
+Examples of prohibited root properties include:
+
+communication_strategy
+
+strategic_assessment
+
+communication_framework
+
+implementation_framework
+
+communication_plan
+
+communication_outputs
+
+deliverables
+
+Any property name not explicitly defined by this Output Contract is prohibited.
 
 No root property may be omitted.
 
@@ -2545,21 +2579,105 @@ This object shall always contain the following properties.
 
 official_institutional_statement
 
+{
+    status
+    audience
+    objective
+    content
+    validation_requirements
+}
+
 social_media_response
+
+{
+    status
+    audience
+    objective
+    content
+    validation_requirements
+}
 
 press_statement
 
+{
+    status
+    audience
+    objective
+    content
+    validation_requirements
+}
+
+
 internal_communication_note
+
+
+{
+    status
+    audience
+    objective
+    content
+    validation_requirements
+}
 
 executive_briefing
 
+
+{
+    status
+    audience
+    objective
+    content
+    validation_requirements
+}
+
 key_communication_messages
+
+
+{
+    status
+    audience
+    objective
+    content
+    validation_requirements
+}
 
 questions_and_answers
 
+
+{
+    status
+    audience
+    objective
+    content
+    validation_requirements
+}
+
 communication_implementation_recommendations
 
+
+{
+    status
+    audience
+    objective
+    content
+    validation_requirements
+}
+
 Each communication deliverable shall itself be a structured JSON object.
+
+Each communication deliverable shall contain exactly the following properties and no others:
+
+status
+
+audience
+
+objective
+
+content
+
+validation_requirements
+
+No additional properties are permitted.
 
 Each communication deliverable shall always contain the following properties.
 
@@ -2829,24 +2947,42 @@ The generated response shall exactly follow this hierarchy.
 The root JSON object shall contain exactly the following properties.
 The following JSON hierarchy is normative.
 
-The generated response shall exactly follow this hierarchy.
+The generated response shall consist of exactly one valid JSON object.
+
+The root JSON object shall exactly follow the hierarchy defined below.
+
+No root property may be omitted.
+
+No root property may be renamed.
+
+No additional root property may be generated.
+
+The order of the root properties shall remain exactly as defined below.
 
 {
-    metadata
-    executive_recommendation
-    situation_assessment
-    risk_assessment
-    communication_objective
-    recommended_communication_strategy
-    alternative_communication_strategies
-    communication_implementation_framework
-    communication_deliverables
-    implementation_recommendations
-    decision_support
-    confidence_assessment
-    quality_assurance_summary
+    metadata,
+    executive_recommendation,
+    situation_assessment,
+    risk_assessment,
+    communication_objective,
+    recommended_communication_strategy,
+    alternative_communication_strategies,
+    communication_implementation_framework,
+    communication_deliverables,
+    implementation_recommendations,
+    decision_support,
+    confidence_assessment,
+    quality_assurance_summary,
     human_validation_notice
 }
+
+Every root property shall itself be a structured JSON object whose internal structure is defined in the corresponding subsection of this Output Contract.
+
+The agent shall generate every mandatory nested property exactly as specified.
+
+Only property values may vary according to the validated analytical evidence.
+
+The JSON hierarchy and property names shall never vary.
 
 No root property may be omitted.
 
@@ -2864,7 +3000,20 @@ Before returning the response, the agent shall internally verify that the genera
 
 If any required property is missing, renamed, reordered or incorrectly structured, the JSON object shall be regenerated before being returned.
 
-Returning an invalid JSON schema constitutes an execution failure.
+Final Schema Validation
+
+Before returning the response, the agent shall internally verify that:
+
+- every mandatory root property exists;
+- every mandatory nested property exists;
+- no property has been renamed;
+- no prohibited property exists;
+- no additional property exists;
+- the JSON hierarchy exactly matches this Output Contract;
+- the JSON is syntactically valid.
+
+If any validation fails, the entire JSON object shall be regenerated before being returned.}
+
 
 
 
