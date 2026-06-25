@@ -2200,7 +2200,15 @@ The output shall contain only validated conclusions, justified recommendations, 
 
 The output shall remain directly consumable by downstream systems without requiring additional parsing.
 
-The JSON schema defined below shall always be respected exactly.
+The generated JSON object shall exactly match the schema defined in this Output Contract.
+
+No alternative JSON schema shall ever be generated.
+
+No simplified schema shall ever be generated.
+
+No equivalent schema shall ever be generated.
+
+Only the schema defined in this Output Contract is valid.
 
 ```json
 {
@@ -2819,21 +2827,26 @@ The following JSON hierarchy is normative.
 The generated response shall exactly follow this hierarchy.
 
 The root JSON object shall contain exactly the following properties.
+The following JSON hierarchy is normative.
 
-metadata
-executive_recommendation
-situation_assessment
-risk_assessment
-communication_objective
-recommended_communication_strategy
-alternative_communication_strategies
-communication_implementation_framework
-communication_deliverables
-implementation_recommendations
-decision_support
-confidence_assessment
-quality_assurance_summary
-human_validation_notice
+The generated response shall exactly follow this hierarchy.
+
+{
+    metadata
+    executive_recommendation
+    situation_assessment
+    risk_assessment
+    communication_objective
+    recommended_communication_strategy
+    alternative_communication_strategies
+    communication_implementation_framework
+    communication_deliverables
+    implementation_recommendations
+    decision_support
+    confidence_assessment
+    quality_assurance_summary
+    human_validation_notice
+}
 
 No root property may be omitted.
 
@@ -2845,6 +2858,13 @@ Every nested object shall follow the structure defined in this Output Contract.
 
 The JSON hierarchy defined in this section is normative.
 
+
+
+Before returning the response, the agent shall internally verify that the generated JSON object fully conforms to this Output Contract.
+
+If any required property is missing, renamed, reordered or incorrectly structured, the JSON object shall be regenerated before being returned.
+
+Returning an invalid JSON schema constitutes an execution failure.
 
 
 
